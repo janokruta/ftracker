@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "ftracker"
+version = "0.1.0"
+description = "Ftracker notifies you when someone unfollows you on social media."
+authors = ["Jan Okruta <jan.okruta@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.2"
+black = "^22.6.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 96
+target_version = ['py39']
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs
+    | \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | docs
+    | htmlcov
+  )/
+)
+'''
