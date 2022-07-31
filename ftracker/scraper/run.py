@@ -6,19 +6,25 @@ from pyppeteer.browser import Browser
 from ftracker.scraper.client import InstagramClient
 
 
-async def get_browser(headless: bool = True) -> Browser:
+width = int
+height = int
+
+
+async def get_browser(
+    headless: bool = True, window_size: tuple[width, height] = (1280, 720)
+) -> Browser:
     return await launch(
         headless=headless,
         args=[
             "--no-sandbox",
             "--disable-setuid-sandbox",
-            "--window-size=1600,900",
+            f"--window-size={window_size[0]},{window_size[1]}",
         ],
     )
 
 
 async def main():
-    browser = await get_browser(headless=False)
+    browser = await get_browser(headless=False, window_size=(1600, 1006))
     page = await browser.newPage()
     await page.setViewport({"width": 1600, "height": 900})
 
