@@ -1,4 +1,5 @@
 import asyncio
+import os
 
 from pyppeteer import launch
 from pyppeteer.browser import Browser
@@ -24,14 +25,16 @@ async def get_browser(
 
 
 async def main():
-    browser = await get_browser(headless=False, window_size=(1600, 1006))
+    browser = await get_browser(headless=False, window_size=(1280, 840))
     page = await browser.newPage()
-    await page.setViewport({"width": 1600, "height": 900})
+    await page.setViewport({"width": 1280, "height": 720})
 
     ig_client = InstagramClient()
-    await ig_client.login(page, "username", "password")
+    ig_username = os.getenv("INSTAGRAM_USERNAME")
+    ig_password = os.getenv("INSTAGRAM_PASSWORD")
+    await ig_client.login(page, ig_username, ig_password)
 
     await browser.close()
 
 
-asyncio.get_event_loop().run_until_complete(main())
+asyncio.run(main())
